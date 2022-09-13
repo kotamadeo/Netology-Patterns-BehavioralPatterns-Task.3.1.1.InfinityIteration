@@ -7,17 +7,12 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 public class Randoms implements Iterable<Integer> {
-    private final Random random = new Random();
-    private IntStream intStream;
-    private PrimitiveIterator.OfInt primitiveIterator;
-    private final int min;
-    private final int max;
+    private final PrimitiveIterator.OfInt primitiveIterator;
 
 
     public Randoms(int min, int max) {
-        this.min = min;
-        this.max = max;
-        this.intStream = random.ints(min, max + 1);
+        Random random = new Random();
+        IntStream intStream = random.ints(min, max + 1);
         this.primitiveIterator = intStream.iterator();
     }
 
