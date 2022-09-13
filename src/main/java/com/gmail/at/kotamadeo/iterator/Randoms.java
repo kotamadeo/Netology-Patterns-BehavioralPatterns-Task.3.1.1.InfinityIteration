@@ -2,10 +2,14 @@ package com.gmail.at.kotamadeo.iterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.PrimitiveIterator;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Randoms implements Iterable<Integer> {
     private final Random random = new Random();
+    private IntStream intStream;
+    private PrimitiveIterator.OfInt primitiveIterator;
     private final int min;
     private final int max;
 
@@ -13,6 +17,8 @@ public class Randoms implements Iterable<Integer> {
     public Randoms(int min, int max) {
         this.min = min;
         this.max = max;
+        this.intStream = random.ints(min, max + 1);
+        this.primitiveIterator = intStream.iterator();
     }
 
 
@@ -29,7 +35,7 @@ public class Randoms implements Iterable<Integer> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return random.nextInt((max - min + 1) + min);
+                return primitiveIterator.nextInt();
             }
         };
     }
